@@ -1,0 +1,7 @@
+uvicorn
+dotenv
+requests
+fastapi
+SQLAlchemy
+google-generativeai
+mariadb

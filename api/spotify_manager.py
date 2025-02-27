@@ -32,8 +32,7 @@ def get_spotify_token():
     token_data = response.json()
     API_TOKEN = token_data["access_token"]
     TOKEN_EXPIRATION = time.time() + token_data["expires_in"]
-    print(API_TOKEN)
-    print(TOKEN_EXPIRATION)
+
     return API_TOKEN
   else:
     raise Exception(f"Error obteniendo el token: {response.status_code} - {response.text}")
@@ -53,8 +52,9 @@ def get_track(id: str):
   elif response.status_code == 404:
     return None
   else:
+    err = response.json()["error"]["message"]
     print(response.status_code)
-    raise Exception(f"Error obteniendo la pista: {response.status_code} - {response.json()["error"]["message"]}")
+    raise Exception(f"Error obteniendo la pista: {response.status_code} - {err}")
   
   
 def find_track(name: str, quantity: int = 1):
@@ -82,7 +82,8 @@ def find_track(name: str, quantity: int = 1):
     return None
   else:
     print(response.status_code)
-    raise Exception(f"Error obteniendo la pista: {response.status_code} - {response.json()["error"]["message"]}")
+    err = response.json()["error"]["message"]
+    raise Exception(f"Error obteniendo la pista: {response.status_code} - {err}")
   
   
   
@@ -92,9 +93,9 @@ def find_track(name: str, quantity: int = 1):
 def get_track_data(data):
   return {
       "id": data["id"],
-      "name": data["name"],
-      "image": data["album"]["images"][0]["url"] if data["album"]["images"] else None,
-      "artist": data["artists"][0]["name"] if data["artists"] else None,
-      "link": data["external_urls"]["spotify"]
+      "nombre": data["name"],
+      "artista": data["artists"][0]["name"] if data["artists"] else None,
+      "url": data["external_urls"]["spotify"],
+      "image_url": data["album"]["images"][0]["url"] if data["album"]["images"] else None
     }
   

@@ -3,7 +3,24 @@ from api.spotify_manager import get_track, find_track
 from api.gemini_manager import wonder_songs
 from urllib.parse import quote
 
+from api.user import router as user_router
+from api.album import router as album_router
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=origins,
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
+
+app.include_router(user_router)
+app.include_router(album_router)
 
 @app.get("/track/{id}")
 async def read_track(id: str):
