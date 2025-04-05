@@ -97,6 +97,7 @@ def get_track_data(data):
       "artist": data["artists"][0]["name"] if data["artists"] else None,
       "url": data["external_urls"]["spotify"],
       "image_url": data["album"]["images"][0]["url"] if data["album"]["images"] else None,
-      "duration": data["duration_ms"]
+      "duration": data["duration_ms"],
+      "album_type": data["album"]["album_type"]
     }
   
