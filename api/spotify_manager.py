@@ -93,9 +93,10 @@ def find_track(name: str, quantity: int = 1):
 def get_track_data(data):
   return {
       "id": data["id"],
-      "nombre": data["name"],
-      "artista": data["artists"][0]["name"] if data["artists"] else None,
+      "name": data["name"],
+      "artist": data["artists"][0]["name"] if data["artists"] else None,
       "url": data["external_urls"]["spotify"],
-      "image_url": data["album"]["images"][0]["url"] if data["album"]["images"] else None
+      "image_url": data["album"]["images"][0]["url"] if data["album"]["images"] else None,
+      "duration": data["duration_ms"]
     }
   
