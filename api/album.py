@@ -15,8 +15,8 @@ class AlbumUpdate(BaseModel):
 
 class CancionCreate(BaseModel):
     id: str
-    nombre: str
-    artista: str
+    name: str
+    artist: str
     url: str
     image_url: str
 
