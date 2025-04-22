@@ -59,7 +59,7 @@ def add_cancion_to_album(album_id: int, cancion: CancionCreate, db: Session = De
     db_album = db.query(Album).filter(Album.id == album_id).first()
     if db_album is None:
         raise HTTPException(status_code=404, detail="Album not found")
-    db_cancion = Cancion(id=cancion.id, nombre=cancion.nombre, artista=cancion.artista, url=cancion.url, image_url=cancion.image_url, id_album=album_id)
+    db_cancion = Cancion(id=cancion.id, nombre=cancion.name, artista=cancion.artist, url=cancion.url, image_url=cancion.image_url, id_album=album_id)
     db.add(db_cancion)
     db.commit()
     db.refresh(db_cancion)
